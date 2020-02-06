@@ -1,13 +1,25 @@
 class User:
     def __init__(self, username):
         self.name = username
+        # instead of "self.account = BankAccount(int_rate=0.02, balance=0) which is one to one relationship"
+        # we set it as "key = account number; value = BankAccount object" using dictionary as it is one to many relationship
         self.accounts = {}
-        self.accounts = BankAccount()
 
-    def create_account(self, balance = 0, int_rate = 0.01):
-        import random, math
-        account_number = math.floor(random.random*(1000000000000000))
-        self.accounts[account_number] = balance
+    def create_account(self, account_number, balance = 0, int_rate = 0.01):
+        # import random, math
+        # while True:
+        #     account_number = math.floor(random.random*(1000000000000000))
+        #     if account_number not in self.accounts:
+        #         break
+        if account_number not in self.accounts:
+            self.accounts[account_number] = BankAccount(balance, int_rate)
+        else:
+            print("account number is not unique")
+        return self
+        
+    def display_account_info(self, account_number):
+        self.accounts[account_number].display_account_info()
+        return self
         
 class BankAccount:
     def __init__(self, balance = 0, int_rate = 0.01):
@@ -20,7 +32,7 @@ class BankAccount:
             print("+$" + str(amount))
            
         else:
-            print("trying to deposit less than ore equal to $0")
+            print("trying to deposit less than or equal to $0")
         return self
         
     def withdraw(self, amount):
@@ -32,7 +44,7 @@ class BankAccount:
                 self.account_balance -= amount
                 print("-$" + str(amount))
         else:
-            print("trying to withdraw less than ore equal to $0")
+            print("trying to withdraw less than or equal to $0")
         return self
                 
     def yield_interest(self):
@@ -58,11 +70,14 @@ class BankAccount:
 # yuta.withdraw(100).display_account_info()
 		
 # # #USER1
-akimi = User("Akimi", "akimi@gmail.com")
+akimi = User("Akimi")
 # print(akimi.name)
 # print(akimi.email)
-
-akimi.accounts.deposit(1000).deposit(200).deposit(1000).withdraw(100).yield_interest().display_account_info()
+akimi.create_account(11111111116)
+akimi.display_account_info(11111111116)
+akimi.accounts[11111111116].deposit(1000)
+akimi.display_account_info(11111111116)
+# akimi.accounts.deposit(1000, ).deposit(200).deposit(1000).withdraw(100).yield_interest().display_account_info()
 
 # glen = User("Glen", "glen@gmail.com")
 
