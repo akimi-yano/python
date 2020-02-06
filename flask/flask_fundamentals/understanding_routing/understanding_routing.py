@@ -28,7 +28,7 @@ def say_name(name):
 
 @app.route("/repeat/<number>/<name>")
 def say_number_name(number, name):
-    return name*(int(number))
-    
+    return name*int(number)
+
 if __name__ == "__main__":
     app.run(debug=True)
