@@ -1,0 +1,13 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+table{
+    text-align: center;
+    font-family: 'Luckiest Guy', cursive;
+}
+h1{
+    font-family: 'Luckiest Guy', cursive;
+    color: red;
+}
