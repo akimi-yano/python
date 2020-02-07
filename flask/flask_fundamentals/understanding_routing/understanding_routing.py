@@ -30,5 +30,9 @@ def say_name(name):
 def say_number_name(number, name):
     return name*int(number)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return "Sorry! No response. Try again."
+
 if __name__ == "__main__":
     app.run(debug=True)
