@@ -14,8 +14,19 @@
     {% for i in range(num_height): %}
         <tr>
         {% for j in range(num_width): %}
-        <td class = 'color{{(i+j)%2+1}}'></td>
-        {% endfor %}
+        
+        {% if custom_colors %}
+          {% if (i + j) % 2 %}
+            <td style = 'background-color: {{color1}};'></td>
+          {% else %}
+            <td style = 'background-color: {{color2}};'></td>
+          {%endif%}
+
+          {# the old way #}
+        {% else %}
+          <td class = 'color{{(i+j)%2+1}}'></td>
+        {% endif %}
+          {% endfor %}
         </tr>
     {% endfor %}
     </table>
