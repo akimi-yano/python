@@ -1,0 +1,53 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+.cover{
+    border: 1px dotted black;
+    margin: auto;
+    padding: 1vw;
+    width: 70vw;
+}
+h1{
+    text-align: center;
+    color:black;
+    margin-top: 5vw;
+    font-family: 'Permanent Marker', cursive;
+}
+p{
+    text-align: center;
+    color: black;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.custom-select{
+    width: auto;
+    vertical-align: middle;
+}
+.input_box{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    text-align: center;
+    margin: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+.comment{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+.btn-dark{
+    margin: auto;
+    text-align: center; 
+    display: block;
+    font-family: 'Permanent Marker', cursive;
+}
+.formatter{
+    text-align: center;
+}
+.choice{
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+    margin: auto;
+}

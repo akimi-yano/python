@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel ='stylesheet' type = 'text/css' href = "{{url_for('static', filename = 'css/stylesheet.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dojo Survey</h1>
+    <div class="cover">
+        <form action="/result" method="post">
+
+            <p>Your Name: <input class="input_box" type="text" name="name"></p>
+            <div class="gender">
+            <p>Gender: 
+                <label for = "male">Male</label>
+                <input type ="radio" id = "male" name = "gender" value = "male">
+
+                <label for = "female">Female</label>
+                <input type ="radio" id = "female" name = "gender" value = "female">
+
+                <label for = "other">Other</label>
+                <input type ="radio" id = "other" name = "gender" value = "other">
+            </p>
+            </div>
+            <p>Dojo Location: 
+                <select class="custom-select" name ="location">
+                    <option value ="san_jose">San Jose</option>
+                    <option value ="seattle">Seattle</option>
+                    <option value ="la">LA</option>
+                    <option value ="onine">Online</option>
+                    <option value ="dallas">Dallas</option>
+                    <option value ="arlington">Arlington</option>
+                    <option value ="chicago">Chicago</option>
+                    <option value ="tulsa">Tulsa</option>
+                    <option value ="oakland">Oakland</option>
+                    <option value ="boise">Boise</option>
+                    <option value ="oc">OC</option>
+                </select>
+            </p>
+            <p>Favorite Language: 
+                <select class="custom-select" name ="fav_language">
+                    <option value ="python">Python</option>
+                    <option value ="java">Java</option>
+                    <option value ="html">HTML</option>
+                    <option value ="ruby">Ruby/Ruby on Rails</option>
+                    <option value ="javascript">JavaScript</option>
+                    <option value ="c++">C++</option>       
+                </select>
+            </p>
+            <p>What type of improvements would you like to see in our program?: </p>
+
+            <div class="formatter">
+                <label class = choice for = "contents">Contents</label>
+                <input type = "checkbox" id = "contents" name = "improvements" value = "contents">
+ 
+                <label class = choice for = "schedules">Schedules</label>
+                <input type = "checkbox" id = "schedules" name = "improvements" value = "schedules">
+
+                <label class = choice for = "instructions">Instructions</label>
+                <input type = "checkbox" id = "instructions" name = "improvements" value = "instructions">
+
+                <label class = choice for = "speeds">Speeds</label>
+                <input type = "checkbox" id = "speeds" name = "improvements" value = "speeds">
+            </div>
+           
+            <div class="formatter">
+                <p class = "comment">Comment (optional): 
+                <textarea class="input_box" name = "comment"></textarea>
+                </p>
+            </div>
+            <input class = "btn btn-dark" type = "Submit">
+        </form>
+    </div>
+</body>
+</html>
+
