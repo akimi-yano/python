@@ -4,7 +4,7 @@
 }
 .cover{
     border: 1px dotted black;
-    margin: auto;
+    margin: 1vw auto;
     padding: 1vw;
     width: 70vw;
 }
@@ -42,6 +42,7 @@ p{
     text-align: center; 
     display: block;
     font-family: 'Permanent Marker', cursive;
+    text-decoration: none;
 }
 .formatter{
     text-align: center;
@@ -50,4 +51,20 @@ p{
     font-family: 'Permanent Marker', cursive;
     text-align: center;
     margin: auto;
+}
+a{
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s;
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+    font-weight: 400;
+    vertical-align: middle;
+    width: 79.58px;
+    height: 28px;
+    margin: 3vw;
 }
