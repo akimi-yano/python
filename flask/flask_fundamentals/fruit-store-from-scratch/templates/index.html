@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel ='stylesheet' type = 'text/css' href = "{{url_for('static', filename = 'css/style.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/checkout" method="post">
+        <h1>Dojo Fruit Store!</h1>
+        <div class="containning">
+            <div class="shopping">
+            <h3>What would you like to buy?</h3>
+            <table  id = "table" class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Fruit Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Strawberry</td>
+                        <td>
+                            <select class="custom-select" name = "strawberry_num">
+                                {% for i in range(0,101): %}
+                                <option value = "{{i}}">{{i}}</option>
+                                {% endfor %}
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Rasberry</td>
+                        <td>
+                            <select class="custom-select" name = "rasberry_num">
+                                {% for j in range(0,101): %}
+                                <option value = "{{j}}">{{j}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Apple</td>
+                        <td>
+                            <select class="custom-select" name = "apple_num">
+                                {% for k in range(0,101): %}
+                                <option value = "{{k}}">{{k}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Your Information</h3>
+
+                <table id = "info">
+                    <tbody>
+                        <tr>
+                            
+                            <td>
+                                <label for = "name">Name: </label>
+                                <input type = "text" id = "name" name = "name">
+                            </td>
+
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <label for = "student_id">Student ID: </label>
+                                <input type = "text" id = "student_id" name = "student_id">
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-success">Buy me stuff</button>
+            </div>
+            <div class="explanation">
+                <h3>Welcome to Dojo Fruit Store!</h3>
+                <h4>Your dojo decided to buy fruits for all the students! Please use this app to tell us what you would like to have! once we get your order, we'll change your student account automatically.</h4>
+                <h4>Dojo Ftuit Store is proudly build using Flask.</h4>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

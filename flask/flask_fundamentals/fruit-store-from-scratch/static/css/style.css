@@ -1,0 +1,64 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+a{
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s;
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+    font-weight: 400;
+    vertical-align: middle;
+}
+h1, h3, td, th, h4, p{
+    font-family: 'Gloria Hallelujah', cursive;
+}
+h1{
+    margin: 3vw;
+    text-align: center;
+}
+.shopping{
+    display: inline-block;
+    width: 45vw;
+}
+h3{
+    text-decoration: underline;
+}
+#table{
+    border: 2px solid black;
+}
+.explanation{
+    display: inline-block;
+    width: 45vw;
+    border: 2px solid black;
+    background-color: palevioletred;
+    padding: 1vw;
+}
+.containning{
+    margin:1px;
+    padding: 1vw;
+    display: flex;
+    justify-content: space-around;
+}
+#student_id, #name{
+    border: 2px solid black;
+    text-align: left;
+}
+.btn-success{
+    font-family: 'Gloria Hallelujah', cursive;
+}
+#info{
+}
+.custom-select{
+    border: 2px solid black;
+    width: 5vw;
+}
+p{
+    text-align: center;
+}
