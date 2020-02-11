@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock Paper Scissors Game!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+</head>
+
+<body>
+    <div class="wrapper">
+    <img src="{{ url_for('static', filename='img/bigger_logo.jpg') }}" alt="game"></img>
+    <div class="containerhere">
+        <form action="/results" method="post">
+            <p>Pick One:</p>
+            <select name="pick">
+                <option value="rock">Rock</option>
+                <option value="paper">Paper</option>
+                <option value="scissors">Scissors</option>
+            </select>
+            <button class="btn btn-info" type="submit"> Go</button>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
