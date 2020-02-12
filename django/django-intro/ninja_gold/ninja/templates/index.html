@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>NINJA GOLD</h1>
+    <p>Your Gold: {{request.session.gold}}</p>
+    <p>Added/ Lost Gold: {{request.session.addition}}</p>
+
+    <form action="/process_money" method = "post">
+        {% csrf_token %}
+        <h2>Farm</h2>
+        <p>(Earns 10-20 golds)</p>
+        <input type="hidden" name="which_form" value="farm">
+        <input type="submit" value="Find Gold!">
+    </form>
+
+    <form action="/process_money" method = "post">
+        {% csrf_token %}
+        <h2>Cave</h2>
+        <p>(Earns 5-10 golds)</p>
+        <input type="hidden" name="which_form" value="cave">
+        <input type="submit" value="Find Gold!">
+    </form>
+        
+    <form action="/process_money" method = "post">
+        {% csrf_token %}
+        <h2>House</h2>
+        <p>(Earns 2-5 golds)</p>
+        <input type="hidden" name="which_form" value="house">
+        <input type="submit" value="Find Gold!">
+    </form>
+
+    <form action="/process_money" method = "post">
+        {% csrf_token %}
+        <h2>Casino</h2>
+        <p>(Earns/takes 0-50 golds)</p>
+        <input type="hidden" name="which_form" value="casino">
+        <input type="submit" value="Find Gold!">
+    </form>
+
+    <p>Activities: </p>
+    <p>{{request.session.activities}}</p>
+</body>
+</html>
