@@ -10,7 +10,21 @@
     <p>Your Gold: {{request.session.gold}}</p>
     <p>Added/ Lost Gold: {{request.session.addition}}</p>
 
-    <form action="/process_money" method = "post">
+    {% if not request.session.goal  %}
+    <form action="/rules" method="post"> 
+        {% csrf_token %}
+        <label for = "moves"># of Moves (Limit): </label>
+        <input type="text" id = "moves" name="moves">
+
+        <label for = "goal"># of Golds (Goal): </label>
+        <input type="text" id = "goal" name="goal">
+        <input type="submit" value="Set this as win condition">
+    </form>
+    {% endif %}
+
+    {% if request.session.attempts < request.session.moves %}
+    <!-- <form action="/process_money" method = "post"> -->
+    <form action="/farm" method = "get">
         {% csrf_token %}
         <h2>Farm</h2>
         <p>(Earns 10-20 golds)</p>
@@ -18,7 +32,8 @@
         <input type="submit" value="Find Gold!">
     </form>
 
-    <form action="/process_money" method = "post">
+    <!-- <form action="/process_money" method = "post"> -->
+    <form action="/cave" method = "get">
         {% csrf_token %}
         <h2>Cave</h2>
         <p>(Earns 5-10 golds)</p>
@@ -26,7 +41,8 @@
         <input type="submit" value="Find Gold!">
     </form>
         
-    <form action="/process_money" method = "post">
+    <!-- <form action="/process_money" method = "post"> -->
+    <form action="/house" method = "get">
         {% csrf_token %}
         <h2>House</h2>
         <p>(Earns 2-5 golds)</p>
@@ -34,13 +50,25 @@
         <input type="submit" value="Find Gold!">
     </form>
 
-    <form action="/process_money" method = "post">
+    <!-- <form action="/process_money" method = "post"> -->
+    <form action="/casino" method = "get">
         {% csrf_token %}
         <h2>Casino</h2>
         <p>(Earns/takes 0-50 golds)</p>
         <input type="hidden" name="which_form" value="casino">
         <input type="submit" value="Find Gold!">
     </form>
+
+    {%else %}
+        {% if request.session.gold >= request.session.goal %}
+            <p>YAY you achieved your goal of {{request.session.goal}} ! You WIN !</p>
+        {% endif %}
+    
+        {% if request.session.gold < request.session.goal %}
+            <p>Oh no you did NOT reach your goal of {{request.session.goal}} ! You LOSE !</p>
+        {% endif %}
+
+    {% endif %}
 
     <p>Activities: </p>
     <p>{{request.session.activities}}</p>
