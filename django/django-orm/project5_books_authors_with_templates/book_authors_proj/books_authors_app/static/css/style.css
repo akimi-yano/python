@@ -1,0 +1,19 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.cover{
+    padding: 1vw;
+    text-align: center;
+}
+.form_org{
+    display: block;
+}
+.add_new{
+    display: inline-block;
+    vertical-align: middle;
+}
+.book_list{
+    display: inline-block;
+    vertical-align: middle; 
+}
