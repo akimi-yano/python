@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sports Leagues</title>
+	</head>
+	<body>
+		<h1>Leagues</h1>
+		<ol>
+			{% for league in leagues %}
+				<li>League Name: {{league.name}}; Sport: {{league.sport}}</li>
+			{% empty %}
+				<p>No leagues found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
+			{% endfor %}
+		</ol>
+		<h1>Teams</h1>
+		<ol>
+			{% for team in teams %}
+				<li>Location: {{team.location}}; Team Name: {{team.team_name}}</li>
+			{% empty %}
+				<p>No teams found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
+			{% endfor %}
+
+			<!-- # LevelII (1)
+			<!-- Try to avoid this! -->
+			<!-- {% for team in teams %}
+				{% if team.league.id == 5 %}
+				<li>Location: {{team.location}}; Team Name: {{team.team_name}}</li>
+				{% endif %}
+			{% empty %}
+				<p>No teams found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
+			{% endfor %} -->
+		</ol>
+		<h1>Players</h1>
+		<ol>
+			{% for player in players %}
+				<li>{{player.first_name}} {{player.last_name}}</li>
+			{% empty %}
+				<p>No teams found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
+			{% endfor %}
+		</ol>
+
+		<ol>
+			{% for league in leagues %}
+				<li>League Name: {{league.name}}; Sport: {{league.sport}}</li>
+				<ol>
+					{% for team in league.teams.all %}
+					<li>{{team.team_name}}</li>
+					{% endfor %}
+				</ol>
+			{% endfor %}
+		</ol>
+
+
+
+		<!-- # LevelII (1)
+		if you know the league, don't do the below, query for the teams for 
+			that league in the views
+		{% for team in league.teams.all %}
+			<p>{{team.team_name}}</p>
+		{% endfor %}
+
+		do this:
+		{% for team in atlanticTeams %}
+			<p>{{team.team_name}}</p>
+		{% endfor %} -->
+
+		<!-- LevelII (2)
+		{% for curr_player in bp_curr_players %}
+			<p>{{curr_player.first_name}} {{curr_player.last_name}}</p>
+		{% endfor %} -->
+
+		<!-- LevelII (3) -->
+		<!-- loop through list of teams -->
+		<!-- {% for team in icbc_teams%} -->
+			<!-- loop through list of players -->
+			<!-- {% for player in team.curr_players.all %}
+			
+				<p>{{player.first_name}} {{player.last_name}}</p>
+			{% endfor %}
+		{% endfor %} -->
+		
+		<!-- LevelII (4) -->
+		<!-- {% for team in teams_acaf %}
+			{% for player in team.curr_players.all %}
+				{% if player.last_name == "Lopez" %}
+				<p>{{player.first_name}} {{player.last_name}}</p>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}  -->
+
+		
+		<!-- # LevelII (5) 
+		{% for team in football_teams %}
+		<ol>
+			<p>{{team.team_name}}</p>	
+			{% for player in team.curr_players.all %}	
+			<li>{{player.first_name}} {{player.last_name}}</li>
+			{% endfor %}	
+		</ol>
+		{% endfor %}
+
+		# LevelII (5)
+		{% for player in football_players %}	
+		<p>{{player.first_name}} {{player.last_name}}</p>
+		{% endfor %} -->
+
+		<!-- # LevelII (6)
+		{% for team in team_with_sophia %}
+		<ol>
+			<p>{{team.team_name}}</p>	
+		</ol>
+		{% endfor %} -->
+		
+		
+		<!-- # LevelII (7) -->
+		<!-- {% for league in leagues_with_sophia%}
+		<ol>
+			<p>{{league.name}}</p>	
+		</ol>
+		{% endfor %}
+		 -->
+
+
+		<!-- # LevelII (8) -->
+		 <!-- {% for player in players_who_dont_play_for_wr %}	
+		 	{% if player.last_name == "Flores" %}
+			 <p>{{player.first_name}} {{player.last_name}}</p>
+			 {% endif %}
+		 {% endfor %} --> 
+		 
+		 <!-- # LevelII (9)
+		 {% for team in  all_teams_sam_played %}
+		 <ol>
+			 <p>{{team.team_name}}</p>	
+		 </ol>
+		 {% endfor %} --> 
+
+
+		<!-- # LevelII (10)
+		 {% for player in  players_with_tc %}	
+		 <p>{{player.first_name}} {{player.last_name}}</p>
+		 {% endfor %} --> 
+
+		
+
+		 <!-- # LevelII (11) -->
+		 <!-- {% for player in  players_with_v_all %}	
+		 {% if player not in players_with_v_curr %}
+		 <p>{{player.first_name}} {{player.last_name}}</p>
+		 {% endif %}
+		 {% endfor %} -->
+
+		 <!-- #Test:
+		 <p>{{players_with_v_curr}}</p>
+		 {{players_with_v_all}}
+	  -->
+		  <!-- LevelII (12)
+			
+		{% for team in  teams_jp_all %}
+			{% if team not in teams_jp_curr%}
+			<ol>
+				<p>{{team.location}} {{team.team_name}}</p>	
+			</ol>
+			{% endif %}
+		{% endfor %}  -->
+
+		<!-- # LevelII (13)
+		 {% for player in players_league %}	
+		 {% if player.first_name == "Joshua"%}
+		 <p>{{player.first_name}} {{player.last_name}}</p>
+		 {% endif %}
+		 {% endfor %} -->
+
+		<!-- # LevelII (14)
+		{%for i in test%}
+			<p>{{i.player_count}} {{i.team_name}}</p>
+		{% endfor %}  -->
+
+		<!-- # LevelII (15) -->
+		{%for i in test%}
+			<p>{{i.team_count}} {{i.first_name}} {{i.last_name}}</p>
+		{% endfor %}
+
+	</body>
+</html>
