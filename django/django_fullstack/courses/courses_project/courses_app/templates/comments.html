@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Comments</h1>
+    <form action ="/courses/{{id}}/comments" method = 'post'>
+        {% csrf_token %}
+        <p>Write a comment: </p>
+        <textarea name ="comment"></textarea>
+        <input type ="submit" value="Make a comment">
+    </form>
+    <table>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>Posted {{comment.created_at}}: {{comment.text}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</body>
+</html>

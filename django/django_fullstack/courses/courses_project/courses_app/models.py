@@ -11,12 +11,21 @@ class CourseManager(models.Manager):
 
         return errors
 
-
 class Course(models.Model):
     name=models.CharField(max_length=45)
-    description=models.TextField(null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
     objects = CourseManager()
+
+class Description(models.Model):
+    course = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
+    text=models.TextField(null=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
     
+class Comment(models.Model):
+    text = models.TextField(null=True)
+    course = models.ForeignKey(Course, related_name="comments", on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)

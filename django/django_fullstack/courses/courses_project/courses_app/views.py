@@ -4,7 +4,8 @@ from django.contrib import messages
 
 def index(request):
     context={
-        "courses": Course.objects.all()
+        "courses": Course.objects.all(),
+        "description": Description.objects.all()
     }
 
     return render(request, "index.html", context)
@@ -22,8 +23,11 @@ def submit_course(request):
     if len(request.POST['description'])>0:
         new_course=Course.objects.create(
         name=request.POST['name'],
-        description=request.POST['description']
+        # description=request.POST['description']
         )
+        new_descripton = Description.objects.create(
+        course=new_course, 
+        text=request.POST['description'])
 
     elif len(request.POST['description'])<=0:
         new_course=Course.objects.create(
@@ -41,3 +45,16 @@ def remove(request, id):
     remove_course = Course.objects.get(id=id)
     remove_course.delete()
     return redirect("/")
+
+def show_form(request, id):
+    context={
+        "comments": Comment.objects.filter(course=id),
+        "id": id
+    }
+    return render(request, "comments.html", context)
+
+def comment(request, id):
+    new_comment = Comment.objects.create(text=request.POST['comment'], course=Course.objects.get(id=id))
+    return redirect (f'/show_form/{id}')
+
+
