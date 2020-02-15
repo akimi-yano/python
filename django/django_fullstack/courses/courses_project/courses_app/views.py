@@ -31,3 +31,13 @@ def submit_course(request):
         )
     return redirect('/')
 
+def remove_confirm(request, id):
+    context={
+        "course": Course.objects.get(id = id)
+    }
+    return render(request, "remove.html", context)
+
+def remove(request, id):
+    remove_course = Course.objects.get(id=id)
+    remove_course.delete()
+    return redirect("/")

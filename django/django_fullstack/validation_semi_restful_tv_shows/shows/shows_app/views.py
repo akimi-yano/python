@@ -41,7 +41,7 @@ def create(request):
         network=request.POST['network'], 
         release_date=request.POST['release_date']
         )
-    print("Akimi's boyfriend")
+
     return redirect(f'/shows/{new_show.id}')
 
 
