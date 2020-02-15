@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add a new course</h1>
+    <form action="/submit_course" method='post'>
+        {% csrf_token %}
+    <table>
+        <tbody>
+            <tr>
+                <label for "name">Name: </label>
+                <input type = "text" id = "name" name = "name">
+            </tr>
+            <tr>
+                <td>Description</td>
+                <textarea name = "description"></textarea>
+            </tr>
+            <input type ="submit" value = "Add">
+        </tbody>
+    </table>
+    </form>
+    <h1>Courses</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td>{{course.name}}</td>
+                <td>{{course.description}}</td>
+                <td>{{course.created_at}}</td>
+                <!-- <td><a href="/remove/{{course.id}}">Remove</a></td> -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% message %}
+    <h3>Error Messages: </h3>
+    <ul class ="messages"></ul>
+    {%  %}
+</body>
+</html>

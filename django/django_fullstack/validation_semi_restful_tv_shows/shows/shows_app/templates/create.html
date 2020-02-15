@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+</head>
+
+<body>
+    <h1>Add a New Show</h1>
+    <p class="exists"></p>
+    <a href="/shows">Go Back</a>
+    <form action="/show/data" method="post">
+        {% csrf_token %}
+
+        <p>Title</p>
+        <input type="text" id="title" name="title">
+
+        <p>Network</p>
+        <input type="text" id="network" name="network">
+
+        <p>Release Date</p>
+        <input type="date" id="release_date" name="release_date">
+
+        <p>Description</p>
+        <textarea name="description"></textarea>
+
+        <input type="submit" value="Create">
+
+    </form>
+    
+    <script>
+        
+        $('#title').keyup(function () {
+            $.post('/title/test', $('form').serialize())
+                .done(function (data) {
+                    console.log(data)
+                    if (data['error']) {
+                        $('.exists').html(data['error'])
+                    } else {
+                        $('.exists').html("");
+                    }
+                })
+        })
+
+    </script>
+</body>
+
+</html>
