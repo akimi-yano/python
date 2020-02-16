@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .border{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome {{user.first_name}} さん</h1>
+    <a href="/logout">Log Out</a>
+    <a href="/books/fav_page">See Favorites</a>
+    <a href="/books">Go Back</a>
+    <div class="border"></div>
+
+{% if user == book.user_who_uploaded %}
+
+<form action="/books/edit_book/{{book.id}}" method='post'>
+    {% csrf_token %}
+<table>
+    <tbody>
+        <tr>
+            <td>Title: </td>
+            <td><input type = "text" value = "{{book.title}}" name="title"></td>
+        </tr>
+        <tr>
+            <td>{{book.user_who_uploaded.first_name}} {{book.user_who_uploaded.last_name}}</td>
+        </tr>
+        <tr>
+            <td>{{book.created_at}}</td>
+        </tr>
+        <tr>
+            <td>{{book.updated_at}}</td>
+        </tr>
+        <tr>
+            <td>Description: </td>
+            <td><textarea name ="description">{{book.description}}</textarea></td>
+        </tr>
+        <tr>
+            <input type="submit" value="Update">
+        </tr>
+    </tbody>
+
+</table>
+
+</form>
+
+<form action="/books/delete_book/{{book.id}}" method='post'>
+    {% csrf_token %} 
+    <tr>
+        <input type="submit" value="Delete">
+    </tr>
+</form>
+
+
+
+
+
+{% else %}
+    <h2>{{book.title}}</h2>
+    
+    
+<table>
+    <tr>
+        <td>{{book.user_who_uploaded.first_name}} {{book.user_who_uploaded.last_name}}</td>
+    </tr>
+    <tr>
+        <td>{{book.created_at}}</td>
+    </tr>
+    <tr>
+        <td>{{book.updated_at}}</td>
+    </tr>
+    <tr>
+        <td>{{book.description}}</td>
+    </tr>
+
+</table>
+{% endif %}
+<table>
+
+<h2>Users Who Like This Book</h2>
+
+<ul>
+{% for user in book.users_who_liked.all %}
+<li>{{user.first_name}} {{user.last_name}}</li>
+{% endfor %}
+</ul>
+
+</table>
+
+<tr>
+{% if user not in book.users_who_liked.all %}
+    <td><a href="/books/add_fav/{{book.id}}">Add to Favorites</a></td>
+{% else %}
+    <td><a href="/books/unfav/{{book.id}}">Unfav</a></td>
+{% endif %}
+</tr>
+</body>
+</html>
