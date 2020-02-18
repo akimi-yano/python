@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>add</p>
+    <h1>Edit a song</h1>
+    <form action = "/update_process/" method="post">
+        {% csrf_token %}
+        <p>Title</p>
+        <input type = "text" name ="title">
+        <p>Artist</p>
+        <input type  = "hidden" name = "id" value = "id">
+        <input type = "text" name ="artist">
+        <input type = "submit" value ="Submit">
+
+
+
+    </form>
+</body>
+</html>

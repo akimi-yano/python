@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .kage{
+            display: none;
+            z-index: 5;
+            background-color: black;
+            opacity: 0.8;
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            top:0;
+            left:0;
+        }
+        .modal{
+            background-color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <h1>Add a new course</h1>
+    <form action="/submit_course" method='post'>
+        {% csrf_token %}
+    <table>
+        <tbody>
+            <tr>
+                <td><label for="name">Name: </label></td>
+                <td><input type = "text" id = "name" name = "name"></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><textarea name = "description"></textarea></td>
+            </tr>
+            <tr>
+                <td><input type ="submit" value = "Add"></td>
+            </tr>
+        </tbody>    
+    </table>
+    </form>
+    <h1>Courses</h1>
+    <table class="replaceme">
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td><a href="/show_form/{{course.id}}">{{course.name}}</a></td>
+                <td>{{course.description.text}}</td>
+                <td>{{course.created_at}}</td>
+                <td>
+                    <button id="{{course.id}}" class="deletebutton">Delete</button>
+                </td>
+                <!-- <td><a id = "id" value = {{course.id}} class ="deletebutton" href="/remove_confirm/{{course.id}}">Remove</a></td> -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if messages %}
+    <h3>Error Messages: </h3>
+    <ul class ="messages"></ul>
+    {% for message in messages %}
+    <li>{{message}}</li>
+    {% endfor %}
+    {% endif %}
+
+    <div class="kage">
+        <div class="modal">
+            <form id ="yes">
+                {%csrf_token%}
+                <input id="sending_id" type = "hidden" name ="id">
+                <button type = "submit">○</button>
+            </form>
+            <form id ="no">
+                {%csrf_token%}
+
+                <button type = "submit">×</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $('#yes').submit(function(e) {
+            e.preventDefault();
+            $.post('/deleteajax', $('#yes').serialize())
+            .done(function(data) {
+                $('.replaceme').html(data);
+                $('.kage').hide();
+            })
+        })
+        $(document).on("click", ".deletebutton", function(){
+            var x = $(this).attr('id');
+            console.log(x)
+            $('#sending_id').val(x);
+            console.log($('#sending_id').val())
+            $('.kage').show();
+        })
+    </script>
+
+</body>
+</html>

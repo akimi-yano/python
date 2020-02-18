@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import *
+from .models import*
+from django.http import JsonResponse
 from django.contrib import messages
 
 def index(request):
@@ -25,7 +26,7 @@ def submit_course(request):
         name=request.POST['name'],
         # description=request.POST['description']
         )
-        new_description = Description.objects.create(
+        new_descripton = Description.objects.create(
         course=new_course, 
         text=request.POST['description'])
 
@@ -37,7 +38,8 @@ def submit_course(request):
 
 def remove_confirm(request, id):
     context={
-        "course": Course.objects.get(id = id)
+        "course": Course.objects.get(id = id),
+        # "description": Description.objects.filter(course=id).all()
     }
     return render(request, "remove.html", context)
 
@@ -57,4 +59,12 @@ def comment(request, id):
     new_comment = Comment.objects.create(text=request.POST['comment'], course=Course.objects.get(id=id))
     return redirect (f'/show_form/{id}')
 
+def ajax_remove(request):
+    Course.objects.get(id=request.POST['id']).delete()
+    context = {
+        "courses": Course.objects.all(),
+        "description": Description.objects.all()
+
+    }
+    return render(request, "partialcourse.html", context)
 

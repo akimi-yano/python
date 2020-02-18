@@ -1,0 +1,21 @@
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="replaceme">
+        {% for course in courses %}
+        <tr>
+            <td><a href="/show_form/{{course.id}}">{{course.name}}</a></td>
+            <td>{{course.description.text}}</td>
+            <td>{{course.created_at}}</td>
+            <td>
+                <button id="{{course.id}}" class="deletebutton">Delete</button>
+            </td>
+            <!-- <td><a id = "id" value = {{course.id}} class ="deletebutton" href="/remove_confirm/{{course.id}}">Remove</a></td> -->
+        </tr>
+        {% endfor %}
+    </tbody>

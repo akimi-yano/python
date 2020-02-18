@@ -39,7 +39,7 @@
             {% for course in courses %}
             <tr>
                 <td><a href="/show_form/{{course.id}}">{{course.name}}</a></td>
-                <td>{{description.text}}</td>
+                <td>{{course.description.text}}</td>
                 <td>{{course.created_at}}</td>
                 <td><a href="/remove_confirm/{{course.id}}">Remove</a></td>
             </tr>
