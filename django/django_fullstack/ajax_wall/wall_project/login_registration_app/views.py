@@ -1,10 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import *
 from django.contrib import messages
+
 import bcrypt
-from django.http import JsonResponse
-
-
 
 def index(request):
     return render(request, "index.html")
@@ -47,18 +45,9 @@ def success_login(request):
     context = {
         "first_name" : first_name
     }
-    return render(request, "success_login.html", context)
+    return redirect('/wall')
 
 
 def logout(request):
     del request.session['user_id']
     return redirect('/')
-
-def show_uniqueness_error(request):
-    # errors =  User.objects.basic_validator(request.POST)
-    # if errors['email_exist']:
-    result = User.objects.filter(email = request.POST['email'])
-    if len(result)>0:
-        return JsonResponse({"error": "email already exists!"})
-    else: 
-        return JsonResponse({"success": "OK"})

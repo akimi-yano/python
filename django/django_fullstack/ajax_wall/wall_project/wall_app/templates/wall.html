@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <h1>CodingDojo Wall</h1>
+    <p>Welcome {{user.first_name}}</p>
+    <a href="/logout">Log Out</a>
+    <form action="/wall/submit_message" method="post">
+        {% csrf_token %}
+        <p>Post a message</p>
+        <textarea name="message"></textarea>
+        <input type="submit" value="Post">
+    </form>
+    <div class="container">
+
+        {% for message in messages %}
+        <p>{{message.user.first_name}} さん　says: {{message.text}}　です。{{message.created_at}}</p>
+            {% if message.user.id == request.session.user_id and message.created_at > thirty_min_ago %}
+            <form action="/wall/delete_message" method="post"  class ='delete_message'>
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+                <input type="hidden" value="{{message.id}}" name="message_id">
+            </form>
+            {% endif %}
+
+            {% for comment in message.comments.all %}
+            <li>{{comment.user.first_name}} さん　says: {{comment.text}}　です。{{comment.created_at}}</li>
+            {% if comment.user.id == request.session.user_id and comment.created_at > thirty_min_ago %}
+                <form method="post" class ='delete_comment'>
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                    <input type="hidden" value="{{comment.id}}" name="comment_id">
+                </form>
+            {% endif %}
+            {% endfor %}
+
+            <form action="/wall/submit_comment" method="post" class="comment_form">
+                {% csrf_token %}
+                <input type="hidden" value="{{message.id}}" name="message_id">
+                <p>Post a comment</p>
+                <textarea name="comment"></textarea>
+                <input type="submit" value="Comment">
+            </form>
+        -----------------------------------------
+
+        {% endfor %}
+    </div>
+
+    <script>
+        $(document).on('submit', '.comment_form', function(e){
+            e.preventDefault();
+            $.post('/wall/addComment_ajax', $(this).serialize())
+                .done(function(data) {
+                    $('.container').html(data);
+                })
+        })
+
+        $(document).on('submit', '.delete_comment', function(e){
+            e.preventDefault();
+            $.post('/wall/deleteComment_ajax', $(this).serialize())
+                .done(function(data) {
+                    $('.container').html(data);
+                })
+        })
+
+        $(document).on('submit', '.delete_message', function(e){
+            e.preventDefault();
+            $.post('/wall/deleteMessage_ajax', $(this).serialize())
+                .done(function(data) {
+                    $('.container').html(data);
+                })
+        })
+    </script>
+</body>
+
+</html>

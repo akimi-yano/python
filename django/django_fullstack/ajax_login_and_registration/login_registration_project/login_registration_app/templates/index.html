@@ -38,7 +38,7 @@
                         <td><input type="password" id="confirm_pw" name="confirm_pw"></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" vlaue="Register"></td>
+                        <td><input id="unique_check_submit" type="submit" value="Register"></td>
                     </tr>
                 </tbody>
             </table>
@@ -77,22 +77,63 @@
     {% endif %}
 
     <p class ="errors"></p>
+    <p class="first_name_error"></p>
+    <p class="last_name_error"></p>
 
     <script>
-        $('#email_unique').keyup(function(){
-            $.post('/show_uniqueness_error', $('#unique_check').serialize())
-                .done(function(data){
-                    if(data['error']){
-                        $('.errors').html(data['error'])
-                    }
-                    else{
-                        $('.errors').html("");
-                    }
-                })
+        // $('#email_unique').keyup(function(){
+        //     $.post('/show_uniqueness_error', $('#unique_check').serialize())
+        //         .done(function(data){
+        //             if(data['error']){
+        //                 $('.errors').html(data['error'])
+        //             }
+        //             else{
+        //                 $('.errors').html("");
+        //             }
+        //         })
+        // })
+
+        // $('.register').on('keyup', '#first_name', function(){
+        //     if ($(this)[0].value.length<2){
+        //         $('.first_name_error').html("Fist Name must be at least 2 characters")
+        //     } else {
+        //         $('.first_name_error').html("")
+        //     }
+        // })
+
+        // $('.register').on('keyup', '#last_name', function(){
+        //     if ($(this)[0].value.length<2){
+        //         $('.last_name_error').html("Last Name must be at least 2 characters")
+        //     } else {
+        //         $('.last_name_error').html("")
+        //     }
+        // })
+
+        // $(document).on("click", "#unique_check_submit", function(e){
+        //     if (($('#first_name')[0].value.length<2) || ($('#last_name')[0].value.length<2)) {
+        //         e.preventDefault()
+        //     }
+        //     else{
+        //         continue;
+        //     }
+        // })
+        $('#unique_check').submit(function(e) {
+            var registrationBoolean = true;
+            if (($('#first_name').val().length<2)){
+                $('.first_name_error').html("First Name must be at least 2 characters")
+                registrationBoolean = false;
+            }
+            if ($('#last_name').val().length<2) {
+                $('.last_name_error').html("Last Name must be at least 2 characters")
+                registrationBoolean = false;
+            }
+            
+            if(registrationBoolean) {
+                $('.first_name_error').html("")
+                $('.last_name_error').html("")
+            }
+            return registrationBoolean;
         })
-
-
-
     </script>
 
 </body>
