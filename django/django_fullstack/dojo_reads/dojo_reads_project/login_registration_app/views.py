@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import *
 from django.contrib import messages
+from django.db.models import Count
 
 import bcrypt
 
@@ -36,13 +37,13 @@ def validate(request):
         logged_user=trying_user[0]
         if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
             request.session['user_id']=logged_user.id
-            return redirect('/success_login')
+            return redirect('/books')
     return redirect('/')
 
 
-def success_login(request):
+# def success_login(request):
     
-    return redirect('/reads')
+#     return redirect('/books')
     # first_name = User.objects.get(id=request.session['user_id']).first_name
     # context = {
     #     "first_name" : first_name
@@ -53,3 +54,11 @@ def success_login(request):
 def logout(request):
     del request.session['user_id']
     return redirect('/')
+
+def profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    context={
+        "user": user,
+        "reviews": user.reviews.count()
+    }
+    return render(request, "profile.html", context)

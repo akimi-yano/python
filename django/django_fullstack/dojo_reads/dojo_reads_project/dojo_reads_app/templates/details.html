@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width:50px;
+        }
+    </style>
+    {% load static %}	
+</head>
+<body>
+  
+    <h1>{{book.title}}</h1>
+    <h3>{{book.author.name}}</h3>
+    <h1>Reviews: </h1>
+    <p>--------------------</p>
+    {% for i in book.reviews.all%}
+    <p>Rating: {{i.rating}}</p>
+    {%if i.rating == 1%}
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+
+    {%endif%}
+    {%if i.rating == 2%}
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+
+    {%endif%}
+    {%if i.rating == 3%}
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+
+    {%endif%}
+    {%if i.rating == 4%}
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+
+    {%endif%}
+    {%if i.rating == 5%}
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+    <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
+
+    {%endif%}
+    <p>Reviewer: <a href="/users/{{i.user.id}}">{{i.user.first_name}}</a></p>
+    <p>Review: {{i.text}}</p>
+    <p>Reviewed on: {{i.created_at}}</p>
+    {% if i.user.id == request.session.user_id %}
+    <a href="/books/delete/{{i.id}}">Delete</a>
+    {% endif %}
+    {% endfor %}
+
+
+    <h1>Add a review</h1>
+    <form action="/books/add_review/{{book.id}}" method='post'>
+        {% csrf_token %}
+        <tr>
+            <td>Review: </td>
+            <td><textarea  name="review"></textarea></td>
+        </tr>
+        <tr>
+            <td>Rating: </td>
+
+            <td><select name="rating">
+                {% for i in range %}
+                <option value = "{{i}}">{{i}}</option>
+                {% endfor %}
+    
+            </select></td>
+            <td>stars</td>
+        </tr>
+        <tr>
+            <input type='submit' value='Add Book and Review'>
+        </tr>
+    </form>
+    <a href="/books">Home</a>
+    <a href="/logout">Log Out</a>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add a New  Book Title and a Review: </h1>
+    <form action =/books/send_add method = 'post'>
+        {% csrf_token %}
+        <tr>
+            <td>Book Title: </td>
+            <td><input type="text"  id="title" name="title"></td>
+        </tr>
+        <tr>
+            <td>Author: </td>
+        </tr>
+        <tr>
+            <td>Choose from  the list:  </td>
+            <td>
+                <select name="choose_author">
+                    <option value = "">--New Author--</option>
+                    {% for author in authors %}
+                    <option value = "{{author.id}}">{{author.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Or add a  new author</td>
+            <td><input type="text" id="input_author" name="type_author"></td>
+        </tr>
+        <tr>
+            <td>Review: </td>
+            <td><textarea  name="review"></textarea></td>
+        </tr>
+        <tr>
+            <td>Rating: </td>
+
+            <td><select name="rating">
+                {% for i in range %}
+                <option value = "{{i}}">{{i}}</option>
+                {% endfor %}
+    
+            </select></td>
+            <td>stars</td>
+        </tr>
+        <tr>
+            <input type='submit' value='Add Book and Review'>
+        </tr>
+        
+    </form>
+    
+</body>
+</html>
