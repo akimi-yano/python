@@ -58,7 +58,6 @@ def logout(request):
 def profile(request, user_id):
     user = User.objects.get(id=user_id)
     context={
-        "user": user,
-        "reviews": user.reviews.count()
+        "user": user
     }
     return render(request, "profile.html", context)

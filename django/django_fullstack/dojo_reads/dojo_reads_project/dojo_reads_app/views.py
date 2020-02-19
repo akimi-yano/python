@@ -8,17 +8,15 @@ def index(request):
      user = User.objects.get(id=request.session['user_id'])
      
      recent_reviews = Review.objects.all().order_by('-created_at').all()[:3]
+
      recently_reviewed_book_ids = [review.book.id for review in recent_reviews]
      other_books = Book.objects.exclude(id__in=recently_reviewed_book_ids)
      
      context={
           "books": other_books,
           "reviews": recent_reviews,
-          "users": User.objects.all().order_by('-created_at'),
-          "author": Author.objects.all().order_by('-created_at'),
           "user": user
      }
-     
      
      
      return render(request, "book_list.html", context)

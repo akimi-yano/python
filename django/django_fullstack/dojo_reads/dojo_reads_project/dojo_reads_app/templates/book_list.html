@@ -19,7 +19,6 @@
             {% for review in reviews %}
             <p>------------------------------------------------------------------------------------------------------------</p>
             <h3>Title:  <a href="/books/{{review.book.id}}">{{review.book.title}}</a></h3>
-                        {% if forloop.counter0 < 3 %}
                         <p>Rating:  {{review.rating}}</p>
                         {%if review.rating == 1%}
                         <img src="{% static 'img/ZNec.gif' %}" alt="Star" >
@@ -55,7 +54,6 @@
                         <p>Reviewer: <a href="/users/{{review.user.id}}">{{review.user.first_name}} {{review.user.last_name}}</a></p>
                         <p>Review: {{review.text}}</p>
                         <p>Posted on: {{review.created_at}}</p>
-                        {% endif %}
             {% endfor %}
         </table>
     </div>
