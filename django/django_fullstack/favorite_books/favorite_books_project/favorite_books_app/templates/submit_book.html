@@ -17,6 +17,11 @@
    
     <div class="border"></div>
     <h2>Add a Favorite Book</h2>
+    {% if messages %}
+    {% for message in messages %}
+    <li>{{message}}</li>
+    {% endfor %}
+    {% endif %}
     <form action="/books/add_books" method='post'>
         {% csrf_token %}
     <table>
@@ -70,11 +75,7 @@
 
     </table>
 
-    {% if messages %}
-    {% for message in messages %}
-    <li>{{message}}</li>
-    {% endfor %}
-    {% endif %}
+  
     
 </body>
 </html>

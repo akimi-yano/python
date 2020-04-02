@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>All Events</h1>
+    <a href="/events/add">Add a new event!</a>
+    <a href="/profile">My profile</a>
+    <a href="/events/join_list">List of events you are joining!</a>
+    
+        
+    <a href="/logout">Log out</a>
+    <table>
+
+
+        {% for event in events %}
+        <p>***************************************************************************</p>
+        <tr>
+            <p>Event Name: <a href="/events/show/{{event.id}}">{{event.event_name}}</a></p>
+        </tr>
+        <tr>
+            <p>Location: {{event.location}}</p>
+        </tr>
+        <tr>
+            <p>Start Date: {{event.start_date}}</p>
+        </tr>
+        <tr>
+            <p>End Date: {{event.end_date}}</p>
+        </tr>
+        <tr>
+            <p>Organizer: {{event.organizer.first_name}} {{event.organizer.last_name}}</p>
+        </tr>
+        <tr>
+            <p>Participants: </p>
+            {% for i in event.participants.all %}
+            <ul>
+                <li>{{i.first_name}} {{i.last_name}}</li>
+            </ul>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+
+
+    </table>
+    
+</body>
+</html>

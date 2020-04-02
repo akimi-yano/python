@@ -21,7 +21,6 @@ def register(request):
         first_name = request.POST['first_name'],
         last_name = request.POST['last_name'],
         email = request.POST['email'],
-        birthday = request.POST['birthday'],
         password = pw_hash
         )
     
@@ -37,12 +36,16 @@ def validate(request):
         if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
             request.session['user_id']=logged_user.id
             return redirect('/success_login')
-    messages.error(request, "Invalid login")
+    messages.error(request, "invalid login")
     return redirect('/')
 
 
 def success_login(request):
-    return redirect('/books')
+    first_name = User.objects.get(id=request.session['user_id']).first_name
+    context = {
+        "first_name" : first_name
+    }
+    return render(request, "success_login.html", context)
 
 
 def logout(request):

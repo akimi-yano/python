@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head> 
+<body>
+    <a href="/events">Home</a>
+    <h1>Update the event !</h1>
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+    <form action=/events/edit_submit/{{event.id}} method="post">
+        {% csrf_token %}
+        <p>Event Name: </p>
+        <input type="text" name ="event_name" value ="{{event.event_name}}">
+        <p>Location: </p>
+        <input type="text" name ="location" value ="{{event.location}}">
+        <p>Start Date: </p>
+        <input type="date" name ="start_date" value = "{{event.start_date|date:'Y-m-d'}}">
+        <p>End Date: </p>
+        <input type="date" name ="end_date" value ="{{event.end_date|date:'Y-m-d'}}">
+        <input type='submit' value="Update">
+    </form>
+<a href="/events/show/{{event.id}}">Go Back</a>
+</body>
+</html>

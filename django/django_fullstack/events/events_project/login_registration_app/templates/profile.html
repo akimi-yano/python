@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/logout">Log out</a>
+    <a href="/events">Home</a>
+
+    
+    <p>Name: {{user.first_name}} {{user.last_name}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>My Interest: </p>
+    <ul>
+    {% for interest in my_interests %}
+    <li>{{interest.interest_name}} <a href="/remove_interest/{{interest.id}}">Remove</a></li>
+    {% endfor %}
+    </ul>
+    
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+
+    <td>Add interest: </td>
+    <form action="/add_interests" method='post'>
+        {% csrf_token %} 
+        <tr>
+            {% for interest in other_interests %}
+                <label for='interest'>{{interest.interest_name}}</label>
+                <input type="checkbox" value="{{interest.id}}" name ="interests" id='interest'>
+            {% endfor %}
+        </tr>
+
+        <tr>
+            <p>Other:</p>
+            <td><input type="text" id=interest_input name="new_interest"></td>
+        </tr>
+        <tr>
+            <input type='submit' value="Add">
+        </tr>
+    </form>
+</body>
+</html>

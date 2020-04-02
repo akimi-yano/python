@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/events">Home</a>
+
+    <h1>{{event.event_name}}</h1>
+    <tr>
+        <p>Location: {{event.location}}</p>
+    </tr>
+    <tr>
+        <p>Start Date: {{event.start_date}}</p>
+    </tr>
+    <tr>
+        <p>End Date: {{event.end_date}}</p>
+    </tr>
+    <tr>
+        <p>Organizer: {{event.organizer.first_name}} {{event.organizer.last_name}}</p>
+    </tr>
+    <tr>
+        <p>Participants: </p>
+        {% for i in event.participants.all %}
+        <ul>
+            <li>{{i.first_name}} {{i.last_name}}</li>
+        </ul>
+        {% endfor %}
+    </tr>
+    {% if user == event.organizer %}
+    <a href="/events/edit/{{event.id}}">Edit this event</a>
+    <a href="/events/delete/{{event.id}}">Delete this event</a>
+    {% endif%}
+    {% if user not in event.participants.all %}
+    <a href="/events/join/{{event.id}}">Join this event</a>
+    {% endif %}
+    {% if user in event.participants.all %}
+    <a href="/events/unjoin/{{event.id}}">Unjoin this event</a>
+    {% endif %}
+
+
+    
+</body>
+</html>
