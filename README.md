@@ -1,2 +1,2 @@
-# python
-my projects done for Python stack
+# Python stack 
+Here I saved some of the projects I made using Python
